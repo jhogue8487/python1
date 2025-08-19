@@ -1,2 +1,10 @@
 # python1
+
 Una aplicacion en python, un crud, pasos y ramas para aprender la creacion de un crud con python y manejo de ramas
+1.creamos un entorno virtual
+2.creamos djangocrud, el proyecto
+probar la aplicacion en la consola: python manage.py runserver
+1.crearemos la aplicacion task, dentro del proyecto
+2.en el archivo view una funcion de hola mundo con httpresponse
+3.configuar en djangocrud, setting.py llamar la app task, y urls.py
+probrar la aplicacion comando: py manage.py runserver
