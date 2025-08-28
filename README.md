@@ -15,4 +15,10 @@ probrar la aplicacion comando: py manage.py runserver
 ---
 
 1.crear la carpeta template en taks, y dentro un archivo html
-2.editar el archivo views de taks 3.
+2.editar el archivo views de taks
+3.comprobar el funcionamiento.
+
+---
+
+1.Crear un formulario con la biblioteca de django, en el archivo views de taks
+2.HAcer el envio del formulario como variable
