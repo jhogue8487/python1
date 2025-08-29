@@ -20,8 +20,14 @@ def register(requets):
         #return HttpResponse("Enviando datos por metodo post")
         if requets.POST["password1"] == requets.POST["password2"]:
             #mejora utilizar catch
-            user = User.objects.create_user(username=requets.POST["username"],password=requets.POST["password1"])
-            user.save
-            return HttpResponse("Usuario registrado. !!!")
+            try:
+                user = User.objects.create_user(username=requets.POST["username"],password=requets.POST["password1"])
+                user.save
+                return HttpResponse("Usuario registrado. !!!")
+                
+            except:
+                #return HttpResponse("El usuario ya existe. !!!")
+                return render(requets, "register.html", {"form": UserCreationForm, "error": "El usuario ya existe. !!!"})
         else:
-            return HttpResponse("Las contraseñas no son iguales")
+            #return HttpResponse("Las contraseñas no son iguales")
+            return render(requets, "register.html",{"form": UserCreationForm, "error" : "Las contraseñas no son iguales"})
