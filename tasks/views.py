@@ -9,5 +9,5 @@ def holaMundo(request):
     #return render(request, "home.html", {"mititulo": title, "form": UserCreationForm})
     return render(request, "home.html", {"mititulo": title})
 
-def login(requets):
-    return render(requets, "login.html",{"form": UserCreationForm})
+def register(requets):
+    return render(requets, "register.html",{"form": UserCreationForm})
