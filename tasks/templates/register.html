@@ -1,6 +1,6 @@
 <h2>Formulario</h2>
 <form method="post">
-  {{form.as_p}}
+  {% csrf_token %} {{form.as_p}}
   <button>Enviar</button>
 </form>
 <footer>&copy; Derechos reservados 2025</footer>

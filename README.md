@@ -22,3 +22,7 @@ probrar la aplicacion comando: py manage.py runserver
 
 1.Crear un formulario con la biblioteca de django, en el archivo views de taks
 2.HAcer el envio del formulario como variable
+
+---
+
+Realizar el envio de los datos por el formulario en el mismo archivo, identificando el metodo post y get
