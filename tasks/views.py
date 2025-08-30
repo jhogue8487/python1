@@ -1,16 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import login
+from django.db import IntegrityError
 
 # Create your views here.
 def holaMundo(request):
     #return HttpResponse("<h1>hola mundo</h1>")
     title = "Hola mundo"
     #return render(request, "home.html", {"mititulo": title, "form": UserCreationForm})
-    return render(request, "home.html", {"mititulo": title})
+    return render(request, "helloworld.html", {"mititulo": title})
+def inicio(request):
+    return render(request, "home.html")
 
-def register(requets):
+def registro(requets):
     #verificar si el metodo es get o post
     if requets.method =="GET":
         print("metodo get")
@@ -23,11 +27,15 @@ def register(requets):
             try:
                 user = User.objects.create_user(username=requets.POST["username"],password=requets.POST["password1"])
                 user.save
-                return HttpResponse("Usuario registrado. !!!")
-                
-            except:
+                login(requets, user)
+                #return HttpResponse("Usuario registrado. !!!")
+                return redirect(tareas)
+            except IntegrityError:
                 #return HttpResponse("El usuario ya existe. !!!")
                 return render(requets, "register.html", {"form": UserCreationForm, "error": "El usuario ya existe. !!!"})
         else:
             #return HttpResponse("Las contraseñas no son iguales")
             return render(requets, "register.html",{"form": UserCreationForm, "error" : "Las contraseñas no son iguales"})
+        
+def tareas(request):
+    return render(request, "tasks.html")

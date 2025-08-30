@@ -26,3 +26,17 @@ probrar la aplicacion comando: py manage.py runserver
 ---
 
 Realizar el envio de los datos por el formulario en el mismo archivo, identificando el metodo post y get
+
+---
+
+LOGIN Y VISTAS DE TAREAS
+Crear una html tareas
+En views, un metodo tasks o tareas, retorne el html
+"cuando se registre el usuario que me redirecionea tasks-tareas, importando en la biblioteca redirect de shortcuts
+-tambien crear la cookie, por la sesion, importado la biblioteca contrib.auth el login
+Utilizar el objeto login pasando el reques y el usuario creado.
+-try except, ajustarlo, importar biblioteca django.db integrityError, para corroborar integridad datos.
+
+---
+
+TEMPLATES Y CONDICIONALES
