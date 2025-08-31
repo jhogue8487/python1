@@ -43,3 +43,15 @@ TEMPLATES Y CONDICIONALES
 En la base.html condicionar los link-opciones segun la sesion.
 En views configuar un metodo para salir, con metodo logout de django importado contrib.auth.
 En url configuar la ruta de salir con metodo que creamos.
+
+---
+
+LOGIN
+En views crear nuestra funcion para iniciar sesion, retornando un html.
+Configurar el arhivo html, y el archivo url las rutas.
+Importar authenticationform de contrib.auth.forms y poder crear el form de login.
+En views en la funcion iniciar sesion ahora enviar el form de login.
+En views validar el verbo Get o Post.
+En views validar si los datos enviados estan en bd, con authenticate importado de contrib.auth
+
+---

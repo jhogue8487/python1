@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 
 # Create your views here.
@@ -43,3 +43,14 @@ def tareas(request):
 def salir(request):
     logout(request)
     return redirect(inicio)
+
+def iniciar_sesion(request):
+    if request.method == "GET":
+        return render(request, "login.html", {"form": AuthenticationForm})
+    else:
+        user = authenticate(request, username=request.POST["username"], password=request.POST["password"])
+        if user == None:
+            return render(request, "login.html", {"form": AuthenticationForm, "error":"Usuario y/o contraseña incorrectos !!!"})
+        else:
+            login(request, user)
+            return redirect(inicio)
