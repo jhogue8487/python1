@@ -10,11 +10,17 @@
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/tareas">Tareas</a></li>
-        <li><a href="/iniciarSesion">Iniciar Sesion</a></li>
+
+        {% if user.is_authenticated %}
         <li><a href="/salir">Salir</a></li>
+        {% else %}
+        <li><a href="/iniciarSesion">Iniciar Sesion</a></li>
+
         <li><a href="/registro">Registro</a></li>
+        {% endif %}
       </ul>
     </nav>
     {% block content %} content {% endblock %}
+    <footer><p></p></footer>
   </body>
 </html>

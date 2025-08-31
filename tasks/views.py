@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.db import IntegrityError
 
 # Create your views here.
@@ -23,7 +23,7 @@ def registro(requets):
         #print("metodo POST", requets.POST)
         #return HttpResponse("Enviando datos por metodo post")
         if requets.POST["password1"] == requets.POST["password2"]:
-            #mejora utilizar catch
+            #mejora utilizar try except
             try:
                 user = User.objects.create_user(username=requets.POST["username"],password=requets.POST["password1"])
                 user.save
@@ -39,3 +39,7 @@ def registro(requets):
         
 def tareas(request):
     return render(request, "tasks.html")
+
+def salir(request):
+    logout(request)
+    return redirect(inicio)

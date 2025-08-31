@@ -29,7 +29,7 @@ Realizar el envio de los datos por el formulario en el mismo archivo, identifica
 
 ---
 
-LOGIN Y VISTAS DE TAREAS
+VISTAS DE TAREAS, INICIAR SESION Y GUARDAR LA COOKIE
 Crear una html tareas
 En views, un metodo tasks o tareas, retorne el html
 "cuando se registre el usuario que me redirecionea tasks-tareas, importando en la biblioteca redirect de shortcuts
@@ -40,3 +40,6 @@ Utilizar el objeto login pasando el reques y el usuario creado.
 ---
 
 TEMPLATES Y CONDICIONALES
+En la base.html condicionar los link-opciones segun la sesion.
+En views configuar un metodo para salir, con metodo logout de django importado contrib.auth.
+En url configuar la ruta de salir con metodo que creamos.
