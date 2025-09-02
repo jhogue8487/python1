@@ -52,6 +52,24 @@ Configurar el arhivo html, y el archivo url las rutas.
 Importar authenticationform de contrib.auth.forms y poder crear el form de login.
 En views en la funcion iniciar sesion ahora enviar el form de login.
 En views validar el verbo Get o Post.
-En views validar si los datos enviados estan en bd, con authenticate importado de contrib.auth
+En views validar si los datos enviados, estan en bd, con authenticate importado de contrib.auth
+capturar datos con authenticate, y guardarlos en un objeto user, y guarda la sesion.
+
+---
+
+CREAR LA TABLA TAREAS O TASKS, PARA GUARDAR INFORMACION
+ORM "Object Relational Mapping"
+En la carpeta tasks, archivo models, crear la clase tasks o tareas con su atributos.
+Verificar en los atributos, el tipo de dato segun python.
+Si hay una relacion utilizar las ayudas correspondientes de python
+-Crear la migracion del archivo que acabamos de crear.
+Ejecutar la migracion, para que cree la tabla.
+Ahora ver la ruta /admin que viene por defecto en django
+Crear un superusuario para nuestra aplicacion, por comandos.
+En el panel del admin, no esta la opcion de tareas.
+Editar en carpeta tasks el archivo admin.py, importar el modelo tareas.
+Ya podemos añadir tareas desde el admin
+Ver titulo de la tarea, editanto el archivo models la clase tareas, con una funcion **str\_**
+Ver fecha de creacion, editar admin.py crear clase y atributo solo lectura, y registrar la clase
 
 ---
