@@ -1,3 +1,15 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Tareas</h1>
+<h1>Lista de Tareas</h1>
+
+<a href="/tareas/crear/">Nueva Tarea</a>
+
+<ul>
+  {% for tarea in tareas %}
+
+  <h3><a href="#" alt="Mas detalles">{{tarea.titulo}}</a></h3>
+  <p>{{tarea.descripcion}}</p>
+  <h6>{{tarea.user}}</h6>
+  {% endfor %}
+</ul>
+
 {% endblock content %}

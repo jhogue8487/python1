@@ -1,6 +1,7 @@
 # python1
 
 Una aplicacion en python, un crud, pasos y ramas para aprender la creacion de un crud con python y manejo de ramas
+Paso a paso, para ir creando la aplicacion y cada cambio realizar el commit.
 1.creamos un entorno virtual
 2.creamos djangocrud, el proyecto
 probar la aplicacion en la consola: python manage.py runserver
@@ -73,3 +74,7 @@ Ver titulo de la tarea, editanto el archivo models la clase tareas, con una func
 Ver fecha de creacion, editar admin.py crear clase y atributo solo lectura, y registrar la clase
 
 ---
+
+Hemos agregado tareas desde admin, ahora desde el usuario logueado.
+Editar en views la funcion tareas para listar y crear la funcion ver formulario de tareas:
+El html tareas ya esta creado, y el formulario utilizaremos librerias de python usando el modelo.

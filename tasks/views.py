@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
+from .models import Tareas
 
 # Create your views here.
 def holaMundo(request):
@@ -26,7 +27,7 @@ def registro(requets):
             #mejora utilizar try except
             try:
                 user = User.objects.create_user(username=requets.POST["username"],password=requets.POST["password1"])
-                user.save
+                user.save()
                 login(requets, user)
                 #return HttpResponse("Usuario registrado. !!!")
                 return redirect(tareas)
@@ -38,7 +39,12 @@ def registro(requets):
             return render(requets, "register.html",{"form": UserCreationForm, "error" : "Las contraseñas no son iguales"})
         
 def tareas(request):
-    return render(request, "tasks.html")
+    tasks = Tareas.objects.all()
+    print(tareas)
+    return render(request, "tasks.html", {"tareas": tasks})
+
+def tareas_form(request):
+    return render(request, "tasks_form.html")
 
 def salir(request):
     logout(request)

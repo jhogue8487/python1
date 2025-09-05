@@ -7,10 +7,10 @@ class Tareas (models.Model):
     descripcion = models.TextField(blank=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_completado = models.DateTimeField(null=True)
-    importante = models.BooleanField(False)
+    importante = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     #ver en el panel el titulo segun los atributos de esta clase.
     def __str__(self):
-        #return super().__str__()
+        #return super().__str__()+self.titulo
         return self.titulo
