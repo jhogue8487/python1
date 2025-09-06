@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-#from django.http import HttpResponse
+from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .models import Tareas
+from django import forms
 
 # Create your views here.
 def holaMundo(request):
@@ -44,7 +45,24 @@ def tareas(request):
     return render(request, "tasks.html", {"tareas": tasks})
 
 def tareas_form(request):
-    return render(request, "tasks_form.html")
+    class Tareas_Form(forms.ModelForm):
+        """Form definition for Tareas."""
+        class Meta:
+            """Meta definition for Tareasform."""
+            model = Tareas
+            fields = ('titulo',"descripcion","importante")
+    
+    form = Tareas_Form()
+    #print(form)
+    if request.method == "GET":
+        return render(request, "tasks_form.html", {"form":form})
+    else:
+        #print(request.POST)
+        form = Tareas_Form(request.POST)
+        #return HttpResponse(request.POST)
+        if form.is_valid:
+            form.save()
+            return redirect(tareas)
 
 def salir(request):
     logout(request)
