@@ -24,7 +24,7 @@ urlpatterns = [
     path("holamundo/", views.holaMundo, name="holamundo"),
     path("registro/", views.registro, name="registro"),
     path("tareas/", views.tareas, name="tareas"),
-    path("tareas/crear/", views.tareas_form, name="tareas_crear"),
+    path("tareas/crear/", views.crear_tareas, name="crear_tareas"),
     path("salir/", views.salir, name="salir"),
     path("iniciarSesion/", views.iniciar_sesion, name="iniciarSesion")
 ]

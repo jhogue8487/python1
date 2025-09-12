@@ -77,4 +77,8 @@ Ver fecha de creacion, editar admin.py crear clase y atributo solo lectura, y re
 
 Hemos agregado tareas desde admin, ahora desde el usuario logueado.
 Editar en views la funcion tareas para listar y crear la funcion ver formulario de tareas:
-El html tareas ya esta creado, y el formulario utilizaremos librerias de python usando el modelo.
+El html tareas ya esta creado, y el formulario utilizaremos librerias de python usando el modelo,
+
+---
+
+La creacion de un form lo separamos en un archivo diferente,
