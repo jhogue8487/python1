@@ -14,3 +14,4 @@ class Tareas (models.Model):
     def __str__(self):
         #return super().__str__()+self.titulo
         return self.titulo
+    

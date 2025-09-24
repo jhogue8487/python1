@@ -1,5 +1,7 @@
 # python1
 
+Usuario admin: jhonnyguerrero
+clave: utilizar
 Una aplicacion en python, un crud, pasos y ramas para aprender la creacion de un crud con python y manejo de ramas
 Paso a paso, para ir creando la aplicacion y cada cambio realizar el commit.
 1.creamos un entorno virtual

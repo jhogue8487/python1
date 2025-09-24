@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .models import Tareas
+from .forms import Tareas_Form
 
 
 # Create your views here.
@@ -40,21 +41,51 @@ def registro(requets):
             return render(requets, "register.html",{"form": UserCreationForm, "error" : "Las contraseñas no son iguales"})
         
 def tareas(request):
-    tasks = Tareas.objects.all()
+    #tasks = Tareas.objects.all()
+    #tasks = Tareas.objects.filter(user=request.user, fecha_completado__isnull=True)
+    tasks = Tareas.objects.filter(user=request.user)
     print(tareas)
     return render(request, "tasks.html", {"tareas": tasks})
 
 def crear_tareas(request):
     #print(form)
     if request.method == "GET":
-        return render(request, "tasks_form.html", {"form":Tareas_Form})
+        return render(request, "tasks_create.html", {"form":Tareas_Form})
     else:
         #print(request.POST)
         form = Tareas_Form(request.POST)
-        #return HttpResponse(request.POST)
-        if form.is_valid:
+        #devolver los datos que estan en el formulario
+        new_task = form.save(commit=False)
+        new_task.user = request.user
+        new_task.save()
+        return redirect(tareas)
+        # print (new_task)
+        # return HttpResponse(request.POST)
+        # if form.is_valid:
+        #     new_task = form.save(commit=False)
+        #     new_task.user = request.user
+        #     form.save()#lo guarda en BD
+        #     return redirect(tareas)
+
+def detalle_tareas(request, id):
+    #tarea = Tareas.objects.get(pk=id)#si no encuentra el id, cae el servicio, utiliza get_object_or_404, importarlo en shortcuts
+    tarea = get_object_or_404(Tareas, pk=id, user=request.user)#agregar el usuario, para listar solo las tareas de el.
+    if request.method == "GET":
+        form=Tareas_Form(instance=tarea)#guardamos un formulario con los datos de la tarea de bBD. 
+        return render(request, "tasks_details.html", {"tarea": tarea, "form": form})
+    else:
+        #print(request.POST)#comprobando llegad de datos
+        #capturar posible error
+        try:
+            form = Tareas_Form(request.POST, instance=tarea)
             form.save()
-            return redirect(tareas)
+            return redirect("tareas")
+        except ValueError:
+            return render(request, "tasks_details.html", {"tarea": tarea, "form": form, "erro":"Error actualizando la tarea."})
+
+
+def eliminar_tareas(request):
+    pass
 
 def salir(request):
     logout(request)

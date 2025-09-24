@@ -4,13 +4,29 @@
 <a href="/tareas/crear/">Nueva Tarea</a>
 
 <ul>
-  {% for tarea in tareas %}
+  {% for tarea in tareas %} {% if tarea.importante %}
+  <div style="border: 2px solid tomato">
+    <h3>
+      <a href="{% url 'detalle_tareas' tarea.id%}" alt="Mas detalles"
+        >{{tarea.titulo}}</a
+      >
+    </h3>
+    <p>{{tarea.descripcion}}</p>
 
-  <h3><a href="#" alt="Mas detalles">{{tarea.titulo}}</a></h3>
-  <p>{{tarea.descripcion}}</p>
+    <h6>Autor: {{ tarea.user}}</h6>
+  </div>
+  {% else %}
+  <div style="border: 1px solid #000">
+    <h3>
+      <a href="{% url 'detalle_tareas' tarea.id%}" alt="Mas detalles"
+        >{{tarea.titulo}}</a
+      >
+    </h3>
+    <p>{{tarea.descripcion}}</p>
 
-  <h6>Autor: {{ tarea.user}}</h6>
-  {% endfor %}
+    <h6>Autor: {{ tarea.user}}</h6>
+  </div>
+  {% endif %}{% endfor %}
 </ul>
 
 {% endblock content %}

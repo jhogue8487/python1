@@ -1,7 +1,9 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Formulario de Tareas</h1>
+<h1>Detalle de tarea</h1>
+{{error}}
 <form method="POST">
   {% csrf_token %} {{form}}
-  <button>Guardar</button>
+
+  <button>Actualizar</button>
 </form>
 {% endblock content %}
