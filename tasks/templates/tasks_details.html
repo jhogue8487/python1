@@ -1,9 +1,18 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Detalle de tarea</h1>
+<h1>Detalle de {{tarea.titulo}}</h1>
 {{error}}
 <form method="POST">
   {% csrf_token %} {{form}}
 
   <button>Actualizar</button>
+</form>
+<!-- Boton de tarea completad -->
+<form method="POST" action="{% url 'completada_tareas' tarea.id %}">
+  {% csrf_token %}
+  <button>Completada</button>
+</form>
+<form method="POST" action="{% url 'eliminar_tareas' tarea.id %}">
+  {% csrf_token %}
+  <button>Eliminar</button>
 </form>
 {% endblock content %}

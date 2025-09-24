@@ -24,8 +24,11 @@ urlpatterns = [
     path("holamundo/", views.holaMundo, name="holamundo"),
     path("registro/", views.registro, name="registro"),
     path("tareas/", views.tareas, name="tareas"),
+    path("tareas_completadas/", views.tareas_completadas, name="tareas_completadas"),
     path("tareas/crear/", views.crear_tareas, name="crear_tareas"),
     path("tareas/<int:id>/", views.detalle_tareas, name="detalle_tareas"),
+    path("tareas/<int:id>/completada", views.completada_tareas, name="completada_tareas"),
+    path("tareas/<int:id>/eliminar", views.eliminar_tareas, name="eliminar_tareas"),
     path("salir/", views.salir, name="salir"),
     path("iniciarSesion/", views.iniciar_sesion, name="iniciarSesion")
 ]

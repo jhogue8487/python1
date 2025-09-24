@@ -17,7 +17,10 @@
             <li><a href="/">Home</a></li>
 
             {% if user.is_authenticated %}
-            <li><a href="/tareas">Tareas</a></li>
+            <li><a href="/tareas">Tareas por completar</a></li>
+            <li>
+              <a href="{% url 'tareas_completadas' %}">Tareas Completadas</a>
+            </li>
             <li><a href="/salir">Salir</a></li>
             <p>Usuario: <strong>{{user.username}}</strong></p>
 
@@ -30,7 +33,7 @@
         </nav>
         {% block content %} content {% endblock %}
 
-        <footer><p>&copy; 2025</p></footer>
+        <footer><p>&copy; 2025 Derechos Reservados</p></footer>
       </body>
     </html>
   </head>

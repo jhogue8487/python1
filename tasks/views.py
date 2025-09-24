@@ -6,7 +6,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .models import Tareas
 from .forms import Tareas_Form
-
+from datetime import datetime
+from django.utils import timezone
 
 # Create your views here.
 def holaMundo(request):
@@ -42,10 +43,14 @@ def registro(requets):
         
 def tareas(request):
     #tasks = Tareas.objects.all()
-    #tasks = Tareas.objects.filter(user=request.user, fecha_completado__isnull=True)
-    tasks = Tareas.objects.filter(user=request.user)
+    tasks = Tareas.objects.filter(user=request.user, fecha_completado__isnull=True)#tareas por completar
+    #tasks = Tareas.objects.filter(user=request.user)#todas la s tareas
     print(tareas)
     return render(request, "tasks.html", {"tareas": tasks})
+
+def tareas_completadas(request):
+    tasks = Tareas.objects.filter(user=request.user)
+    return render(request, "tasks_completed.html", {"tareas":tasks})
 
 def crear_tareas(request):
     #print(form)
@@ -83,9 +88,19 @@ def detalle_tareas(request, id):
         except ValueError:
             return render(request, "tasks_details.html", {"tarea": tarea, "form": form, "erro":"Error actualizando la tarea."})
 
+def completada_tareas(request, id):
+    tarea = get_object_or_404(Tareas,pk=id,user=request.user)
+    if request.method=="POST":
+        tarea.fecha_completado = datetime.now()#puede importa timezone de django.utils  timezone
+        #tarea.fecha_completado = timezone.now()
+        tarea.save()
+        return redirect ("tareas")
 
-def eliminar_tareas(request):
-    pass
+def eliminar_tareas(request, id):
+    tarea = get_object_or_404(Tareas, pk=id, user=request.user)
+    if request.method=="POST":
+        tarea.delete()
+        return redirect("tareas")
 
 def salir(request):
     logout(request)
