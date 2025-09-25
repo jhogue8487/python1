@@ -8,6 +8,7 @@ from .models import Tareas
 from .forms import Tareas_Form
 from datetime import datetime
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required#para proteger rutas
 
 # Create your views here.
 def holaMundo(request):
@@ -41,6 +42,7 @@ def registro(requets):
             #return HttpResponse("Las contraseñas no son iguales")
             return render(requets, "register.html",{"form": UserCreationForm, "error" : "Las contraseñas no son iguales"})
         
+@login_required
 def tareas(request):
     #tasks = Tareas.objects.all()
     tasks = Tareas.objects.filter(user=request.user, fecha_completado__isnull=True)#tareas por completar
@@ -48,10 +50,12 @@ def tareas(request):
     print(tareas)
     return render(request, "tasks.html", {"tareas": tasks})
 
+@login_required
 def tareas_completadas(request):
-    tasks = Tareas.objects.filter(user=request.user)
+    tasks = Tareas.objects.filter(user=request.user).order_by("-fecha_completado")#ordena por la fecha
     return render(request, "tasks_completed.html", {"tareas":tasks})
 
+@login_required
 def crear_tareas(request):
     #print(form)
     if request.method == "GET":
@@ -72,6 +76,7 @@ def crear_tareas(request):
         #     form.save()#lo guarda en BD
         #     return redirect(tareas)
 
+@login_required
 def detalle_tareas(request, id):
     #tarea = Tareas.objects.get(pk=id)#si no encuentra el id, cae el servicio, utiliza get_object_or_404, importarlo en shortcuts
     tarea = get_object_or_404(Tareas, pk=id, user=request.user)#agregar el usuario, para listar solo las tareas de el.
@@ -88,6 +93,7 @@ def detalle_tareas(request, id):
         except ValueError:
             return render(request, "tasks_details.html", {"tarea": tarea, "form": form, "erro":"Error actualizando la tarea."})
 
+@login_required
 def completada_tareas(request, id):
     tarea = get_object_or_404(Tareas,pk=id,user=request.user)
     if request.method=="POST":
@@ -96,12 +102,14 @@ def completada_tareas(request, id):
         tarea.save()
         return redirect ("tareas")
 
+@login_required
 def eliminar_tareas(request, id):
     tarea = get_object_or_404(Tareas, pk=id, user=request.user)
     if request.method=="POST":
         tarea.delete()
         return redirect("tareas")
 
+@login_required
 def salir(request):
     logout(request)
     return redirect(inicio)
